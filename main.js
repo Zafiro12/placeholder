@@ -118,7 +118,7 @@ function rotarZ(esfera, angulo, centro = [canvas.width / 2, 0, canvas.height / 2
 /* ESFERA */
 const RADIO = 200;
 const ANILLOS = 32;
-const COLOR = "lightgreen";
+const COLOR = "green";
 
 let e1 = esfera(RADIO, ANILLOS);
 
