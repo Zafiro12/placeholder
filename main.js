@@ -119,7 +119,7 @@ function rotarZ(esfera, angulo, centro = [canvas.width / 2, 0, canvas.height / 2
 const RADIO = 200;
 const ANILLOS = 32;
 const COLOR = "green";
-const FONDO = "transparent";
+const FONDO = "rgba(17,75,32,0.3)";
 
 let e1 = esfera(RADIO, ANILLOS);
 
@@ -129,7 +129,7 @@ rotarY(e1, Math.PI / 16);
 function animar() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     rotarZ(e1, 0.01);
-    dibujarPuntos(e1, COLOR);
+    dibujarPuntos(e1, COLOR, FONDO);
     dibujarLineas(e1, COLOR, FONDO,ANILLOS);
     requestAnimationFrame(animar);
 }
