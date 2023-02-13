@@ -42,7 +42,7 @@ function dibujarPuntos(esfera, color = "white") {
     }
 }
 
-function dibujarLineas(esfera, color = "white",anillos = 16) {
+function dibujarLineas(esfera, color = "white", anillos = 16) {
     for (let i = 0; i < esfera.length; i++) {
         // Si no es el último punto de un anillo, conectar con el siguiente
         if (i % (anillos + 1) !== anillos) {
