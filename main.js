@@ -33,12 +33,12 @@ function esfera(radio = 100, anillos = 16, centro = [canvas.width / 2, 0, canvas
     return puntos;
 }
 
-function dibujarPuntos(esfera, color = "white") {
+function dibujarPuntos(esfera, color = "white", fondo="transparent") {
     for (let i = 0; i < esfera.length; i++) {
         let color_aux = color;
 
         if (esfera[i][1] < 0) {
-            color_aux = "transparent";
+            color_aux = fondo;
         } else {
             color_aux = color;
         }
@@ -50,12 +50,12 @@ function dibujarPuntos(esfera, color = "white") {
     }
 }
 
-function dibujarLineas(esfera, color = "white", anillos = 16) {
+function dibujarLineas(esfera, color = "white", fondo="transparent",anillos = 16) {
     for (let i = 0; i < esfera.length; i++) {
         let color_aux = color;
 
         if (esfera[i][1] < 0) {
-            color_aux = "transparent";
+            color_aux = fondo;
         } else {
             color_aux = color;
         }
@@ -119,6 +119,7 @@ function rotarZ(esfera, angulo, centro = [canvas.width / 2, 0, canvas.height / 2
 const RADIO = 200;
 const ANILLOS = 32;
 const COLOR = "green";
+const FONDO = "transparent";
 
 let e1 = esfera(RADIO, ANILLOS);
 
@@ -129,7 +130,7 @@ function animar() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     rotarZ(e1, 0.01);
     dibujarPuntos(e1, COLOR);
-    dibujarLineas(e1, COLOR, ANILLOS);
+    dibujarLineas(e1, COLOR, FONDO,ANILLOS);
     requestAnimationFrame(animar);
 }
 
