@@ -33,12 +33,42 @@ function esfera(radio = 100, anillos = 16, centro = [canvas.width / 2, 0, canvas
     return puntos;
 }
 
-function dibujarPuntos(esfera) {
+function dibujarPuntos(esfera, color = "white") {
     for (let i = 0; i < esfera.length; i++) {
         ctx.beginPath();
         ctx.arc(esfera[i][0], esfera[i][2], 2, 0, 2 * Math.PI);
-        ctx.fillStyle = "white";
+        ctx.fillStyle = color;
         ctx.fill();
+    }
+}
+
+function dibujarLineas(esfera, color = "white",anillos = 16) {
+    for (let i = 0; i < esfera.length; i++) {
+        // Si no es el último punto de un anillo, conectar con el siguiente
+        if (i % (anillos + 1) !== anillos) {
+            ctx.beginPath();
+            ctx.moveTo(esfera[i][0], esfera[i][2]);
+            ctx.lineTo(esfera[i + 1][0], esfera[i + 1][2]);
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        }
+        // Si no es el primer punto de un anillo, conectar con el anterior
+        if (i < esfera.length - anillos - 1) {
+            ctx.beginPath();
+            ctx.moveTo(esfera[i][0], esfera[i][2]);
+            ctx.lineTo(esfera[i + anillos + 1][0], esfera[i + anillos + 1][2]);
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        }
+
+        // Si es el último anillo, conectar con el primero
+        if (i > esfera.length - anillos - 2) {
+            ctx.beginPath();
+            ctx.moveTo(esfera[i][0], esfera[i][2]);
+            ctx.lineTo(esfera[i - esfera.length + anillos + 1][0], esfera[i - esfera.length + anillos + 1][2]);
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        }
     }
 }
 
@@ -75,9 +105,10 @@ function animar() {
     rotarY(e1, 0.01);
     rotarZ(e1, 0.01);
     dibujarPuntos(e1);
+    dibujarLineas(e1);
     requestAnimationFrame(animar);
 }
 
-e1 = esfera(300, 55);
+e1 = esfera();
 
 animar();
