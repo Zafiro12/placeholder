@@ -1,8 +1,3 @@
-const canvas = document.querySelector("#canvas");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
 /*
 function distanciaPuntos(p1, p2) {
     return Math.sqrt(Math.pow((p2[0] - p1[0]), 2) + Math.pow((p2[1] - p1[1]), 2) + Math.pow((p2[2] - p1[2]), 2));
@@ -33,7 +28,10 @@ function esfera(radio = 100, anillos = 16, centro = [canvas.width / 2, 0, canvas
     return puntos;
 }
 
-function dibujarPuntos(esfera, color = "white", fondo="transparent") {
+function dibujarPuntos(esfera, color = "white", fondo = "transparent") {
+    const canvas = document.querySelector("#canvas");
+    const ctx = canvas.getContext("2d");
+
     for (let i = 0; i < esfera.length; i++) {
         let color_aux = color;
 
@@ -50,7 +48,10 @@ function dibujarPuntos(esfera, color = "white", fondo="transparent") {
     }
 }
 
-function dibujarLineas(esfera, color = "white", fondo="transparent",anillos = 16) {
+function dibujarLineas(esfera, color = "white", fondo = "transparent", anillos = 16) {
+    const canvas = document.querySelector("#canvas");
+    const ctx = canvas.getContext("2d");
+
     for (let i = 0; i < esfera.length; i++) {
         let color_aux = color;
 
@@ -115,6 +116,12 @@ function rotarZ(esfera, angulo, centro = [canvas.width / 2, 0, canvas.height / 2
     }
 }
 
+/* CANVAS */
+const canvas = document.querySelector("#canvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
 /* ESFERA */
 const RADIO = 200;
 const ANILLOS = 32;
@@ -126,12 +133,13 @@ let e1 = esfera(RADIO, ANILLOS);
 rotarX(e1, Math.PI / 8);
 rotarY(e1, Math.PI / 16);
 
-function animar() {
+function animarRotacion() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     rotarZ(e1, 0.01);
     dibujarPuntos(e1, COLOR, FONDO);
-    dibujarLineas(e1, COLOR, FONDO,ANILLOS);
-    requestAnimationFrame(animar);
+    dibujarLineas(e1, COLOR, FONDO, ANILLOS);
+    requestAnimationFrame(animarRotacion);
 }
 
-animar();
+animarRotacion();
