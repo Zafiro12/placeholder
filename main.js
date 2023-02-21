@@ -1,7 +1,8 @@
 function esfera(
   radio = 100,
   anillos = 16,
-  centro = [canvas.width / 2, 0, canvas.height / 2]
+  centro = [canvas.width / 2, 0, canvas.height / 2],
+  ruido = 0
 ) {
   // Radio en píxeles, anillos en número de puntos, centro en coordenadas de pantalla x, y, z.
 
@@ -16,9 +17,14 @@ function esfera(
   const alto = Math.PI / anillos;
   for (let i = 0; i < anillos; i++) {
     for (let j = 0; j <= anillos; j++) {
-      const x = radio * Math.cos(i * ancho) * Math.sin(j * alto) + centro[0];
-      const y = radio * Math.sin(i * ancho) * Math.sin(j * alto) + centro[1]; // no se usa dado que no es visible
-      const z = radio * Math.cos(j * alto) + centro[2];
+      const x =
+        radio * Math.cos(i * ancho) * Math.sin(j * alto) +
+        centro[0] * (1 + Math.random() * ruido);
+      const y =
+        radio * Math.sin(i * ancho) * Math.sin(j * alto) +
+        centro[1] * (1 + Math.random() * ruido);
+      const z =
+        radio * Math.cos(j * alto) + centro[2] * (1 + Math.random() * ruido);
       puntos.push([x, y, z]);
     }
   }
