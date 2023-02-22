@@ -188,6 +188,12 @@ function animacion() {
         color_aux = COLOR;
     }
 
+    // Dibujar puntos
+    ctx.beginPath();
+    ctx.arc(e1[i][0], e1[i][2], 2, 0, 2 * Math.PI);
+    ctx.fillStyle = color_aux;
+    ctx.fill();
+
     if (i % (ANILLOS + 1) !== ANILLOS) {
         ctx.beginPath();
         ctx.moveTo(e1[i][0], e1[i][2]);
@@ -226,9 +232,9 @@ function animacion() {
 
 function animarRotacion() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     rotarZ(e1, -0.005);
     dibujarLineas(e1, COLOR, FONDO, ANILLOS);
+	dibujarPuntos(e1, COLOR, FONDO);
     requestAnimationFrame(animarRotacion);
 }
 
