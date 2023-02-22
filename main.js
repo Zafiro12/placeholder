@@ -188,11 +188,6 @@ function animacion() {
         color_aux = COLOR;
     }
 
-    if (i % (ANILLOS / 4) === 0) { // Efecto de movimiento
-        ctx.fillStyle = "rgba(0, 0, 0, .05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
-
     if (i % (ANILLOS + 1) !== ANILLOS) {
         ctx.beginPath();
         ctx.moveTo(e1[i][0], e1[i][2]);
@@ -224,8 +219,17 @@ function animacion() {
     if (i > 0) {
         i -= 1;
     } else {
-        i = e1.length - 1;
+        animarRotacion();
+        clearInterval(creacion);
     }
 }
 
-setInterval(animacion, 1);
+function animarRotacion() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    rotarZ(e1, -0.005);
+    dibujarLineas(e1, COLOR, FONDO, ANILLOS);
+    requestAnimationFrame(animarRotacion);
+}
+
+var creacion = setInterval(animacion, 1);
